@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ( !isset($_SESSION['auth_step2']) || $_SESSION['auth_step2'] != 'success' ) {
+    header('location:../index.php');;
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>

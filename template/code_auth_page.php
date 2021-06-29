@@ -1,5 +1,15 @@
 <?php 
-    require_once __DIR__.'/vendor/autoload.php';
+    session_start();
+
+    if ( !isset($_SESSION['auth_step1']) || $_SESSION['auth_step1'] != 'success' ) {
+      header('location:../index.php');
+    } else {
+      echo '$_SESSION[\'auth_step1\'] = ' . $_SESSION['auth_step1'] . ' ___';
+    }
+
+    // require_once __DIR__.'../vendor/autoload.php';
+    define('__ROOT__', dirname(dirname(__FILE__))); 
+    require_once (__ROOT__.'/vendor/autoload.php');
 
     use OTPHP\TOTP;
 
@@ -17,8 +27,6 @@
     // Afficher l'url du qrcode (var_dump) ou rediriger vers cet url (header)
     //var_dump($qr_code_url);
     //header('location: '.$qr_code_url);
-    echo 'Le code généré pour une durée de 30 sec est : '
-      . $otp->now();
 
 ?>
 
@@ -64,11 +72,19 @@
 
           <!-- Formaulaire du code à 6 chiffres de Google Authentificator -->
           <h6 style="text-align:left;">Entrez le code à 6 chiffres fourni par Google Authentificator</h6>
-          <form action="two_factor_authentication/codeVerificator.php" method="POST">
-            <input type="text" name="code" class="form-control" placeholder="123456">
+          <form action="../two_factor_authentication/codeVerificator.php" method="POST">
+            <input type="text" name="code" class="form-control" placeholder="123456" autofocus>
+            <small class="form-text text-muted" style="text-align:left;">
+              <?php 
+                echo 'Le code généré pour une durée de 30 sec est : ' 
+                . $otp->now(); ?>
+            </small>
             <br/>
             <button type="submit" class="btn btn-success">Verifier</button>
           </form>
+
+          <div>tester les routes sans avoir passer les étapes d'authentification :</div>
+          <div>http://cliinique-le-chatelet-access-page/template/welcome.php</div>
 
         </div>
       </div>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
     <html>
     <head>
@@ -21,10 +24,41 @@
                 <input type="password" name="password">
             </div>
             <br/>
+
+            <?php 
+            if ( isset($_SESSION["connectionAttempt"]) && $_SESSION["connectionAttempt"] == 5 ) {
+                ?>
+                <div class="form-check">
+                    <input class="form-check-input" name="checkbox_captcha" type="checkbox" id="checkbox_captcha">
+                    <label class="form-check-label" for="checkbox_captcha">
+                        [CAPTCHA] Je ne suis pas un robot
+                    </label>
+                </div>
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Combien font 2 + 7 ? </span>
+                </div>
+                <input type="text" name="question_result" class="form-control col-2" id="question_result" placeholder="18">
+                </div>
+                <br/>
+                <?php
+            }
+            ?>
+
             <div>
                 <input type="submit" value="Se connecter" class="btn btn-success">
             </div>
         </form>
+
+        <div>tester les routes sans avoir passer les étapes d'authentification :</div>
+        <div>http://cliinique-le-chatelet-access-page/template/code_auth_page.php</div>
+        <div>http://cliinique-le-chatelet-access-page/template/welcome.php</div>
+        <br/>
+
+        <?php 
+            if (isset($_SESSION["connectionAttempt"])) 
+                echo 'nombre de tentatives de connexion => ' . $_SESSION["connectionAttempt"];
+        ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

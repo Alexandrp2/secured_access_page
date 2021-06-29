@@ -1,4 +1,6 @@
 <?php 
+    session_start();
+
     define('__ROOT__', dirname(dirname(__FILE__))); 
     require_once (__ROOT__.'/vendor/autoload.php');
 
@@ -10,13 +12,14 @@
     if( !empty($_POST['code']) ){
 
         if( $otp->verify(htmlspecialchars($_POST['code'])) ) {
-            header('Location: ../welcome.php');
+            $_SESSION["auth_step2"] = 'success';
+            header('Location: ../template/welcome.php');
             die();
         } else {
-            header('Location: ../code_auth_page.php?verif=not_valid_code');
+            header('Location: ../template/code_auth_page.php?verif=not_valid_code');
             die();
         }
     }else{
-        header('Location: ../code_auth_page.php'); 
+        header('Location: ../template/code_auth_page.php'); 
         die();
     }
