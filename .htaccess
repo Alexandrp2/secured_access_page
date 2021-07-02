@@ -1,0 +1,5 @@
+<IfModule mod_env.c>
+    SetEnv LDAP_AUTH_LOGIN "login de connexion sur le serveur LDAP"
+    SetEnv LDAP_AUTH_PW "mot de passe de connexion sur le serveur LDAP"
+    SetEnv LDAP_SERVER_URL "url"
+</IfModule>
