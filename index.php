@@ -50,6 +50,20 @@ session_start();
             </div>
         </form>
 
+        <?php
+            if ( isset($_GET["status"]) ){
+                switch ($_GET["status"]){
+                    case 403:
+                        ?><div>Identifiants invalides</div>
+                        <?php break;
+                    case 400:
+                        ?><div style="color:red; font-weight: bold;">PASSWORD PAWNED</div>
+                        <?php break;
+
+                }
+            }
+        ?>
+
         <div>tester les routes sans avoir passer les étapes d'authentification :</div>
         <div>http://cliinique-le-chatelet-access-page/template/code_auth_page.php</div>
         <div>http://cliinique-le-chatelet-access-page/template/welcome.php</div>

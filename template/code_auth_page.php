@@ -4,10 +4,9 @@
     if ( !isset($_SESSION['auth_step1']) || $_SESSION['auth_step1'] != 'success' ) {
       header('location:../index.php');
     } else {
-      echo '$_SESSION[\'auth_step1\'] = ' . $_SESSION['auth_step1'] . ' ___';
+      // echo '$_SESSION[\'auth_step1\'] = ' . $_SESSION['auth_step1'] . ' ___';
     }
 
-    // require_once __DIR__.'../vendor/autoload.php';
     define('__ROOT__', dirname(dirname(__FILE__))); 
     require_once (__ROOT__.'/vendor/autoload.php');
 
